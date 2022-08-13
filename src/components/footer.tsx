@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import Link from 'next/link'
 import { MailIcon } from '@heroicons/react/solid'
 
 const Footer: FC = () => {
@@ -7,6 +8,7 @@ const Footer: FC = () => {
       <a
         className='text-sm text-blue-700 hover:text-blue-800'
         href='https://gator.sh'
+        target='_blank'
       >
         Gator
       </a>
@@ -14,6 +16,7 @@ const Footer: FC = () => {
         <a
           href='https://github.com/gatorsh'
           className='text-slate-500 hover:text-slate-900'
+          target='_blank'
         >
           <svg
             className='w-5 h-5'
@@ -32,6 +35,7 @@ const Footer: FC = () => {
         <a
           href='mailto:vijay@vijaystroup.com'
           className='text-slate-500 hover:text-slate-900'
+          target='_blank'
         >
           <MailIcon className='w-5 h-5' />
           <span className='sr-only'>Email</span>
