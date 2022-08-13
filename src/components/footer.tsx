@@ -9,7 +9,7 @@ const Footer: FC = () => {
         className='text-sm text-blue-700 hover:text-blue-800'
         href='https://gator.sh'
         target='_blank'
-        rel='noopener'
+        rel='noreferrer'
       >
         Gator
       </a>
@@ -18,7 +18,7 @@ const Footer: FC = () => {
           href='https://github.com/gatorsh/to'
           className='text-slate-500 hover:text-slate-900'
           target='_blank'
-          rel='noopener'
+          rel='noreferrer'
         >
           <svg
             className='w-5 h-5'
