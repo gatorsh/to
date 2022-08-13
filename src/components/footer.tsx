@@ -9,14 +9,16 @@ const Footer: FC = () => {
         className='text-sm text-blue-700 hover:text-blue-800'
         href='https://gator.sh'
         target='_blank'
+        rel='noopener'
       >
         Gator
       </a>
       <div className='flex space-x-2'>
         <a
-          href='https://github.com/gatorsh'
+          href='https://github.com/gatorsh/to'
           className='text-slate-500 hover:text-slate-900'
           target='_blank'
+          rel='noopener'
         >
           <svg
             className='w-5 h-5'
@@ -35,7 +37,6 @@ const Footer: FC = () => {
         <a
           href='mailto:vijay@vijaystroup.com'
           className='text-slate-500 hover:text-slate-900'
-          target='_blank'
         >
           <MailIcon className='w-5 h-5' />
           <span className='sr-only'>Email</span>
