@@ -2,10 +2,15 @@ import type { AppType } from 'next/dist/shared/lib/utils'
 import type { AppRouter } from '../server/routers/app'
 import { withTRPC } from '@trpc/next'
 import { httpLink } from '@trpc/client/links/httpLink'
+import Layout from '../components/layout'
 import '../styles/global.css'
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
 }
 
 export default withTRPC<AppRouter>({
