@@ -1,39 +1,51 @@
 import { createRouter } from '../createRouter'
 import { customAlphabet } from 'nanoid'
 import { newLink } from '../schema/link'
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
 import { TRPCError } from '@trpc/server'
+import dayjs from 'dayjs'
 
-const alphabet = '0123456789abcdefghijklmnopqrstuvwxyz'
+const alphabet = '!@$^&*()-_=+0123456789abcdefghijklmnopqrstuvwxyz'
 const nanoid = customAlphabet(alphabet, 5)
 
 export const linkRouter = createRouter().mutation('new', {
   input: newLink,
   resolve: async ({ ctx, input }) => {
-    let { slug, destination } = input
+    const { destination } = input
 
-    // TODO: check if user in session has access to make custom slug
-    // get session on server in trpc context and check with ctx.user
+    const slug = nanoid()
 
-    if (!slug) slug = nanoid()
+    const link = await ctx.prisma.link.findUnique({
+      where: { slug }
+    })
+
+    if (link) {
+      if (link.updatedAt > dayjs().subtract(3, 'day').toDate()) {
+        throw new TRPCError({
+          code: 'CONFLICT',
+          message: 'Slug already exists.'
+        })
+      }
+
+      // TODO: generate new slug and retry
+    }
 
     try {
-      await ctx.prisma.link.create({
-        data: {
+      await ctx.prisma.link.upsert({
+        where: { slug },
+        update: {
+          destination,
+          clicks: 0
+        },
+        create: {
           slug,
           destination
         }
       })
     } catch (e) {
-      console.log(e)
-      if (e instanceof PrismaClientKnownRequestError) {
-        if (e.code === 'P2002') {
-          throw new TRPCError({
-            code: 'CONFLICT',
-            message: 'slug already exists.'
-          })
-        }
-      }
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Something went wrong.'
+      })
     }
 
     return slug
