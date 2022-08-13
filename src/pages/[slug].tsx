@@ -5,12 +5,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug } = context.query
 
   const link = await prisma.link.findUnique({
-    where: {
-      slug: slug as string
-    }
+    where: { slug: slug as string }
   })
 
   if (link) {
+    await prisma.link.update({
+      where: { slug: slug as string },
+      data: { clicks: { increment: 1 } }
+    })
+
     return {
       redirect: {
         destination: link.destination,
