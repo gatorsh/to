@@ -39,7 +39,8 @@ const Slug: NextPage<SlugProps> = ({ slug }) => {
   return (
     <main className='flex flex-col items-center mt-24'>
       <h1 className='text-3xl text-center'>
-        <span className='text-blue-700'>{slug}</span> doesn't go to anywhere :(
+        <span className='text-blue-700'>{slug}</span> doesn&apos;t go to
+        anywhere :(
       </h1>
       <Link href='/'>
         <a className='mt-10 hover:underline'>Go Back / To Shorten URL</a>
