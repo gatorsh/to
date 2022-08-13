@@ -15,9 +15,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
 export default withTRPC<AppRouter>({
   config({ ctx }) {
-    const url = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}/api`
-      : 'http://localhost:3000/api'
+    // const url = process.env.VERCEL_URL
+    //   ? `https://${process.env.VERCEL_URL}/api`
+    //   : 'http://localhost:3000/api'
+    const url = 'https://to.gator.sh/api'
 
     const links = [
       httpLink({
