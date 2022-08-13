@@ -100,7 +100,7 @@ const Home: NextPage = () => {
               type='submit'
               className='p-2.5 text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800'
               onClick={() => {
-                copy(`http://localhost:3000/${slug}`)
+                copy(`https://to.gator.sh/${slug}`)
                 setCopied(true)
               }}
             >
