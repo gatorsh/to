@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white;
+    @apply text-black;
+    @apply bg-[url('/topography.svg')];
+  }
+}
