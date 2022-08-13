@@ -4,7 +4,7 @@ import { newLink } from '../schema/link'
 import { TRPCError } from '@trpc/server'
 import dayjs from 'dayjs'
 
-const alphabet = '!@$^&*()-_=+0123456789abcdefghijklmnopqrstuvwxyz'
+const alphabet = '0123456789abcdefghijklmnopqrstuvwxyz'
 const nanoid = customAlphabet(alphabet, 5)
 
 export const linkRouter = createRouter().mutation('new', {
