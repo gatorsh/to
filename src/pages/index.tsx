@@ -3,10 +3,9 @@ import { useCallback, useState } from 'react'
 import { trpc } from '../utils/trpc'
 import {
   LinkIcon,
-  ClipboardCopyIcon,
-  ClipboardCheckIcon,
   CheckIcon,
-  XIcon
+  XIcon,
+  DuplicateIcon
 } from '@heroicons/react/solid'
 import copy from 'copy-to-clipboard'
 import Spinner from '../components/spinner'
@@ -53,14 +52,17 @@ const Home: NextPage = () => {
   return (
     <main className='flex flex-col items-center mt-24'>
       <div>
-        <label htmlFor='destination' className='text-xs text-slate-500'>
+        <label
+          htmlFor='destination'
+          className='text-xs text-slate-500 dark:text-slate-300'
+        >
           URL To Shorten
         </label>
         <div className='flex justify-center'>
           <input
             type='input'
             id='destination'
-            className={`px-2.5 text-md bg-transparent border backdrop-blur-[1.5px] rounded-l-lg placeholder-slate-300 ${
+            className={`px-2.5 text-md bg-transparent border backdrop-blur-[1.5px] rounded-l-lg placeholder-slate-300 dark:placeholder-slate-300/25 dark:border-white/10 ${
               error ? 'border-red-600' : ''
             }`}
             placeholder='https://www.gator.sh/...'
@@ -88,12 +90,14 @@ const Home: NextPage = () => {
 
       {slug && (
         <div className='flex flex-col mt-10'>
-          <p className='text-xs text-slate-500'>Shortened URL</p>
+          <p className='text-xs text-slate-500 dark:text-slate-300'>
+            Shortened URL
+          </p>
           <div className='flex'>
-            <span className='inline-flex items-center px-2.5 text-md text-slate-400 bg-slate-300 rounded-l-lg'>
+            <span className='inline-flex items-center px-2.5 text-md text-slate-400 bg-slate-300 rounded-l-lg dark:text-slate-600 dark:bg-slate-800'>
               to.gator.sh/
             </span>
-            <span className='px-2.5 bg-transparent border backdrop-blur-[1.5px] text-blue-700 flex items-center text-lg'>
+            <span className='px-2.5 bg-transparent border backdrop-blur-[1.5px] text-blue-700 flex items-center text-lg dark:border-white/10'>
               {slug}
             </span>
             <button
@@ -104,8 +108,8 @@ const Home: NextPage = () => {
                 setCopied(true)
               }}
             >
-              {copied && <ClipboardCheckIcon className='w-5 h-5' />}
-              {!copied && <ClipboardCopyIcon className='w-5 h-5' />}
+              {!copied && <DuplicateIcon className='w-5 h-5' />}
+              {copied && <CheckIcon className='w-5 h-5' />}
             </button>
           </div>
         </div>

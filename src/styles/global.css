@@ -11,5 +11,10 @@
     @apply bg-[url('/topography.svg')];
     @apply h-screen;
     @apply font-ShareTechMono;
+
+    /* dark mode */
+    @apply dark:bg-black;
+    @apply dark:text-white;
+    @apply dark:bg-[url('/topography_dark.svg')];
   }
 }

@@ -4,7 +4,7 @@ import { MailIcon } from '@heroicons/react/solid'
 
 const Footer: FC = () => {
   return (
-    <footer className='absolute bottom-0 flex flex-col items-center w-full py-1 bg-slate-100/20 backdrop-blur-[1.5px]'>
+    <footer className='absolute bottom-0 flex flex-col items-center w-full py-1 bg-slate-100/20 backdrop-blur-[1.5px] dark:bg-slate-100/5'>
       <a
         className='text-sm text-blue-700 hover:text-blue-800'
         href='https://gator.sh'
@@ -16,7 +16,7 @@ const Footer: FC = () => {
       <div className='flex space-x-2'>
         <a
           href='https://github.com/gatorsh/to'
-          className='text-slate-500 hover:text-slate-900'
+          className='text-slate-500 hover:text-slate-900 dark:text-slate-100 dark:hover:text-slate-400'
           target='_blank'
           rel='noreferrer'
         >
@@ -36,7 +36,7 @@ const Footer: FC = () => {
         </a>
         <a
           href='mailto:vijay@vijaystroup.com'
-          className='text-slate-500 hover:text-slate-900'
+          className='text-slate-500 hover:text-slate-900 dark:text-slate-100 dark:hover:text-slate-400'
         >
           <MailIcon className='w-5 h-5' />
           <span className='sr-only'>Email</span>
