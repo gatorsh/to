@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         }
       )
     },
-    [mutate, destination, slug]
+    [mutate, destination]
   )
 
   return (
