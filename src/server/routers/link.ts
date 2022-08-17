@@ -4,13 +4,16 @@ import { newLink } from '../schema/link'
 import { TRPCError } from '@trpc/server'
 import dayjs from 'dayjs'
 
-const alphabet = '0123456789abcdefghijklmnopqrstuvwxyz'
+const alphabet = '0123456789abcdefghijklmnopqrstuvwxyz-_'
 const nanoid = customAlphabet(alphabet, 5)
 
 export const linkRouter = createRouter().mutation('new', {
   input: newLink,
   resolve: async ({ ctx, input }) => {
-    const { destination } = input
+    let { destination } = input
+
+    // transform destination to absolute url if needed
+    if (!destination.startsWith('http')) destination = `https://${destination}`
 
     const slug = nanoid()
 
