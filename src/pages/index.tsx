@@ -23,35 +23,40 @@ const Home: NextPage = () => {
 
   const { mutate } = trpc.useMutation(['link.new'])
 
-  const submit = useCallback(() => {
-    setLinkIcon(<Spinner />)
-    mutate(
-      {
-        destination
-      },
-      {
-        onSuccess: (slug) => {
-          setError(null)
-          setSlug(slug)
-          setLinkIcon(<CheckIcon className={linkClassAttr} />)
+  const submit = useCallback(
+    (e: React.SyntheticEvent) => {
+      e.preventDefault()
+
+      setLinkIcon(<Spinner />)
+      mutate(
+        {
+          destination
         },
-        onError: (e) => {
-          if (e.data?.code === 'CONFLICT') {
-            // TODO: retry
+        {
+          onSuccess: (slug) => {
+            setError(null)
+            setSlug(slug)
+            setLinkIcon(<CheckIcon className={linkClassAttr} />)
+          },
+          onError: (e) => {
+            if (e.data?.code === 'CONFLICT') {
+              // TODO: retry
+            }
+
+            const error = JSON.parse(e.message)[0]
+
+            setError(error.message)
+            setLinkIcon(<XIcon className={linkClassAttr + ' text-red-600'} />)
           }
-
-          const error = JSON.parse(e.message)[0]
-
-          setError(error.message)
-          setLinkIcon(<XIcon className={linkClassAttr + ' text-red-600'} />)
         }
-      }
-    )
-  }, [mutate, destination, slug])
+      )
+    },
+    [mutate, destination, slug]
+  )
 
   return (
     <main className='flex flex-col items-center mt-24'>
-      <div>
+      <form onSubmit={submit}>
         <label
           htmlFor='destination'
           className='text-xs text-slate-500 dark:text-slate-300'
@@ -79,12 +84,11 @@ const Home: NextPage = () => {
           <button
             type='submit'
             className='p-2.5 text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800'
-            onClick={submit}
           >
             {linkIcon}
           </button>
         </div>
-      </div>
+      </form>
 
       {error && <p className='text-red-600'>{error}</p>}
 
