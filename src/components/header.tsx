@@ -8,6 +8,7 @@ const Header: FC = () => {
     <>
       <SEO />
 
+      <div className='text-center bg-red-600/50'>🚧 Under Construction 🚧</div>
       <header className='flex items-center justify-between p-2'>
         <h1 className='text-4xl text-blue-700'>
           <Link href='/'>
